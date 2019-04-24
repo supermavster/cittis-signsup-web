@@ -1,0 +1,20 @@
+parameters:
+	earlyTerminatingMethodCalls:
+		PHPUnit\Framework\TestCase:
+			- fail
+			- markTestIncomplete
+			- markTestSkipped
+
+services:
+	-
+		class: PHPStan\Type\PHPUnit\CreateMockDynamicReturnTypeExtension
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension
+	-
+		class: PHPStan\Type\PHPUnit\GetMockBuilderDynamicReturnTypeExtension
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension
+	-
+		class: PHPStan\Type\PHPUnit\MockBuilderDynamicReturnTypeExtension
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension

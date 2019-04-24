@@ -1,0 +1,95 @@
+# PHP Variables
+php_value upload_max_filesize 40M
+php_value post_max_size 40M
+php_value max_input_time 1000
+php_value max_execution_time 1000
+php_value max_file_uploads 1000
+#php_value memory_limit = 512M
+
+# Main variables
+DirectoryIndex index.php
+AddDefaultCharset utf-8
+DefaultLanguage en-EN
+# Evitar que se liste el contenido de los directorios
+Options -Indexes +FollowSymLinks +SymLinksIfOwnerMatch -MultiViews
+# Lo mismo que lo anterior
+IndexIgnore *
+# Protegerse contra los ataques DOS limitando el tamaño de subida de archivos
+LimitRequestBody 10240000
+
+## Deny Access for files Main ##
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+## Deny Access for files Main ##
+
+## Check Spelling Language ##
+<IfModule mod_speling.c>
+    CheckSpelling On
+</IfModule>
+## Check Spelling Language ##
+
+## Force Apache Complements ##
+<files page>
+    ForceType application/x-httpd-php
+</files>
+## Force Apache Complements ##
+
+## Rewrite Rules for Friendly URLs ##
+<IfModule mod_rewrite.c>
+    
+    # Start Values
+    RewriteEngine On
+    RewriteBase /
+
+    # Index Values
+    RewriteRule ^/$ index.php [L]
+
+    # SSL
+        #RewriteCond %{HTTPS} off
+        #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Firebase Data
+        RewriteRule ^firebase-database.js$ signsup/source/model/admin/config.js
+
+
+    # Evitar escaneos y cualquier intento de manipulación malintencionada de la URL. Con esta regla es imposible lanzar ataques de inyección (SQL, XSS, etc)
+        RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+        RewriteCond %{HTTP_USER_AGENT} ^(-|\.|') [OR]
+        RewriteCond %{HTTP_USER_AGENT} ^(.*)(<|>|%3C|%3E)(.*) [NC,OR]
+        RewriteCond %{HTTP_USER_AGENT} ^(java|curl|wget)(.*) [NC,OR]
+        RewriteCond %{HTTP_USER_AGENT} ^(.*)(libwww-perl|libwwwperl|snoopy|curl|wget|winhttp|python|nikto|scan|clshttp|archiver|loader|email|harvest|fetch|extract|grab|miner|suck|reaper|leach)(.*) [NC,OR]
+        RewriteCond %{REQUEST_URI} ^(/,|/;|/<|/>|/'|/`|/%2C|/%3C|/%3E|/%27|/////) [NC,OR]
+        RewriteCond %{HTTP_REFERER} ^(.*)(%00|%08|%09|%0A|%0B|%0C|%0D|%0E|%0F|%2C|<|>|'|%3C|%3E|%26%23|%27|%60)(.*) [NC,OR]
+        RewriteCond %{QUERY_STRING} ^(.*)(%00|%08|%09|%0A|%0B|%0C|%0D|%0E|%0F|%2C|%3C|%3E|%27|%26%23|%60)(.*) [NC,OR]
+        RewriteCond %{QUERY_STRING} ^(.*)('|-|<|>|,|/|\\|\.a|\.c|\.t|\.d|\.p|\.i|\.e|\.j)(.*) [NC,OR]
+        RewriteCond %{HTTP_COOKIE} ^(.*)(<|>|'|%3C|%3E|%27)(.*) [NC]
+
+</IfModule>
+## Rewrite Rules for Friendly URLs ##
+
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+
+    ExpiresActive On
+    ExpiresByType image/jpg "access 1 year"
+    ExpiresByType image/jpeg "access 1 year"
+    ExpiresByType image/gif "access 1 year"
+    ExpiresByType image/png "access 1 year"
+    ExpiresByType text/css "access 1 month"
+    ExpiresByType text/html "access 1 month"
+    ExpiresByType application/pdf "access 1 month"
+    ExpiresByType text/x-javascript "access 1 month"
+    ExpiresByType application/x-shockwave-flash "access 1 month"
+    ExpiresByType image/x-icon "access 1 year"
+    ExpiresDefault "access 1 month"
+
+</IfModule>
+## EXPIRES CACHING ##
+
+## Cache Control (1 Mount) ##
+<filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
+    Header set Cache-Control "max-age=2592000, public"
+</filesMatch>
+## Cache Control (1 Mount) ##
