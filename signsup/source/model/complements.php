@@ -46,6 +46,11 @@ function makeElements($string,$checkUFT = true){
     return JsonHandler::decode($string,$checkUFT);
 }
 
+function getActualURL()
+{
+    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    return $actual_link;
+}
 
 # Get Content
 function getContent($dir)

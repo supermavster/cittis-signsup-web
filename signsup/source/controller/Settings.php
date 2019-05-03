@@ -4,6 +4,8 @@
  * Settings for all Web
  */
 
+require_once 'vendor/autoload.php';
+
 class Settings
 {
     // Global Variables
@@ -104,8 +106,24 @@ class Settings
         define("isSession",isset($_SESSION));
 
         define('LOGIN', constant('valuesLogin'));
-        define('isLogin', constant('debug'));
-        //require_once AS_PLUGINS . 'login/sessions.php';
+
+        self::checkData();
+        require_once AS_PLUGINS . 'login-firebase/sessions.php';
+    }
+
+    protected function checkData()
+    {
+        # Define Login
+        $checkUser = false;
+        if (isSession) {
+            $checkDataUser = isset($_SESSION['user']);
+            $checkDataState = isset($_SESSION['state']) && ($_SESSION['state'] === constant("auth"));
+            $checkUser = ($checkDataUser === true) && ($checkDataState === true);
+        }
+        if (constant("debug")) {
+            $checkUser = constant("debug");
+        }
+        define('isLogin', false);
     }
 
     protected function setURL()

@@ -53,6 +53,9 @@ LimitRequestBody 10240000
     # Firebase Data
         RewriteRule ^firebase-database.js$ signsup/source/model/admin/config.js
 
+    # Login
+        RewriteRule ^login$ signsup/source/controller/Login.php
+
 
     # Evitar escaneos y cualquier intento de manipulación malintencionada de la URL. Con esta regla es imposible lanzar ataques de inyección (SQL, XSS, etc)
         RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
