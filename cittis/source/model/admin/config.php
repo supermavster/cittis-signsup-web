@@ -8,7 +8,7 @@
  */
 
 // Debug Project (Only Admin)
-const debug = false;
+const debug = true;
 
 #Config Main
 const limitTime = 300;

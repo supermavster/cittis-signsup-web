@@ -125,7 +125,7 @@ class Settings
         if (constant("debug")) {
             $checkUser = constant("debug");
         }
-        define('isLogin', true);
+        define('isLogin', $checkUser);
     }
 
     protected function setURL()

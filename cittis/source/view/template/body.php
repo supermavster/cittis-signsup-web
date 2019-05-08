@@ -3,7 +3,8 @@ $body = new HTMLTag('body');
 $body->setComment(true);
 // Check if is Login
 if (isLogin) {
-    require_once AS_VIEW . 'index/index.php';
+    require_once AS_PROJECTS . constant("nameProject") . '/view/index.php';
+    //require_once AS_VIEW . 'index/index.php';
 } else {
     require_once(AS_PLUGINS . 'login-firebase/form.php');
 }
