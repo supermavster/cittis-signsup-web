@@ -32,6 +32,8 @@ class MakeActions
 
     protected function initProcess()
     {
+        require_once AS_PROJECTS . '/MainQueriesDAO.php';
+
         switch (checkRequest(true)) {
             case "GET":
                 require_once AS_CONTROL . 'generalData/GetActions.php';

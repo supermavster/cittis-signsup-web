@@ -17,10 +17,10 @@ class Autoload
 
     protected function initProcess()
     {
-        $content = "";
         switch (true) {
             case getRequest("add"):
-                $content = self::addElements();
+                $this->response['error'] = false;
+                $this->response['message'] = 'Señal añadida';
                 break;
             default:
                 $this->response['error'] = true;
@@ -29,31 +29,8 @@ class Autoload
         showElements($this->response);
     }
 
-    protected function addElements()
-    {
-        switch (getRequest("add")) {
-            case 'signal':
-                self::initProcessSignal();
-                break;
-            default:
-                $this->response['error'] = true;
-                $this->response['message'] = 'No existe operacion para este proceso';
-        }
-    }
 
-    protected function initProcessSignal()
-    {
-        require_once 'DbOperation.php';
-        $db = new DbOperation(self::getConnection(), self::getGeneralConnection());
-        if ($db->createSignals(getRequest("signal"))) {
-            $this->response['error'] = false;
-            $this->response['message'] = 'Señal añadida';
-        } else {
-            $this->response['error'] = true;
-            $this->response['message'] = 'No se puede añadir la señal';
-        }
-    }
-
+    /** Get Data Main **/
     protected function getConnection()
     {
         return $this->connection;

@@ -53,7 +53,7 @@ class Autoload
         } else {
             $name = "all";
         }
-        $tempElements = self::getGeneralConnection()->db_exec('fetch_array', QueriesDAO::getDepartments($name));
+        $tempElements = self::getGeneralConnection()->db_exec('fetch_array', MainQueriesDAO::getDepartments($name));
         $i = 0;
         foreach ($tempElements as $key => $value) {
             array_push($tempValues, $value['nameDepartment']);
@@ -77,7 +77,7 @@ class Autoload
         }
 
         $tempValues = array();
-        $tempElements = self::getGeneralConnection()->db_exec('fetch_array', QueriesDAO::getMunicipalityByDepartment($name));
+        $tempElements = self::getGeneralConnection()->db_exec('fetch_array', MainQueriesDAO::getMunicipalityByDepartment($name));
         $i = 0;
         foreach ($tempElements as $key => $value) {
             array_push($tempValues, $value['nameMunicipality']);

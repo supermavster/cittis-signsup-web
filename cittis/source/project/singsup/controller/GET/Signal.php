@@ -127,7 +127,7 @@ class Signal
         $tempID = getRequest("code") ? getRequest("code") : "";
         // Send Table and ID
         $table = $response['tableMain'];
-        $idTable = self::getGeneralConnection()->db_exec('fetch_row', QueriesDAO::getIDTable($table))[0];
+        $idTable = self::getGeneralConnection()->db_exec('fetch_row', MainQueriesDAO::getIDTable($table))[0];
         $countElements = self::getDataBase()->db_exec('num_rows', QueriesDAO::checkID($table, $idTable, $tempID));
 
         if ($countElements > 0) {
@@ -307,7 +307,7 @@ function uploadDataIMG($upload, $fileFolder, $files, $locationFolderMainImages, 
 
     }
     // Set values
-    $idTable = $connection->db_exec('fetch_row', QueriesDAO::getIDTable($tableSelected))[0];
+    $idTable = $connection->db_exec('fetch_row', MainQueriesDAO::getIDTable($tableSelected))[0];
     // GEt data
     if ($tableSelected == 'interpng') {
         $sqlMain = QueriesDAO::addInter($arrayValues);
@@ -319,7 +319,7 @@ function uploadDataIMG($upload, $fileFolder, $files, $locationFolderMainImages, 
     }
     //truncate Table
     !$connection->db_exec('query', "SET FOREIGN_KEY_CHECKS=0;");
-    $sql = QueriesDAO::truncateTable($tableSelected);
+    $sql = MainQueriesDAO::truncateTable($tableSelected);
     !$connection->db_exec('query', $sql);
 
     if (!$connection->db_exec('query', $sqlMain)) {
