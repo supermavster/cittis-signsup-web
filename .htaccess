@@ -51,11 +51,13 @@ LimitRequestBody 10240000
         #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Firebase Data
-        RewriteRule ^firebase-database.js$ signsup/source/model/admin/config.js
+        RewriteRule ^firebase-database.js$ cittis/source/model/admin/config.js
 
     # Login
-        RewriteRule ^login$ signsup/source/controller/Login.php
+        RewriteRule ^login$ cittis/source/controller/Login.php
 
+    # App
+        RewriteRule ^app$ cittis/app/index.php
 
     # Evitar escaneos y cualquier intento de manipulación malintencionada de la URL. Con esta regla es imposible lanzar ataques de inyección (SQL, XSS, etc)
         RewriteCond %{HTTP_USER_AGENT} ^$ [OR]

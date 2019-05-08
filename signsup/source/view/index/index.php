@@ -1,6 +1,0 @@
-
-
-<?php
-$body->appendInnerHTML('Holi');
-
-?>

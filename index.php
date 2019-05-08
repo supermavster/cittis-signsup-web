@@ -9,8 +9,8 @@
  * Copyright (C) 2019 Cittis
  */
 
-//Add Library of Control
-require_once './signsup/source/controller/Control.php';
-//Make the index
+// Add Library of Control
+require_once './cittis/source/controller/Control.php';
+// Make the index
 $ctrl->makeIndex();
 ?>
