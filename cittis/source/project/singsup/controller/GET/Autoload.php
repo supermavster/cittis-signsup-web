@@ -54,7 +54,6 @@ class Autoload
             $name = "all";
         }
         $tempElements = self::getGeneralConnection()->db_exec('fetch_array', MainQueriesDAO::getDepartments($name));
-        $i = 0;
         foreach ($tempElements as $key => $value) {
             array_push($tempValues, $value['nameDepartment']);
         }
