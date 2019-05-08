@@ -36,6 +36,8 @@ class MakeActions
             case "GET":
                 require_once AS_CONTROL . 'generalData/GetActions.php';
                 break;
+            case "GETPOST":
+            case "POSTGET":
             case "POST":
                 require_once AS_CONTROL . 'generalData/PostActions.php';
                 break;
